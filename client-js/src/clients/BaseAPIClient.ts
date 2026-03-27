@@ -95,6 +95,10 @@ export default class BaseAPIClient {
     return await this.request<T>({ method: 'PUT', path, body: body || {} });
   }
 
+  async patchRequest<T>(path: string, body?: unknown) {
+    return await this.request<T>({ method: 'PATCH', path, body: body || {} });
+  }
+
   async deleteRequest<T>(path: string, body?: unknown) {
     return await this.request<T>({ method: 'DELETE', path, body: body || {} });
   }

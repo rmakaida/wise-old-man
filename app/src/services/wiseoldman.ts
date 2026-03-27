@@ -141,6 +141,14 @@ export const getPlayerAchievementProgress = cache((username: string) => {
   return handleNotFound(apiClient.players.getPlayerAchievementProgress(username));
 });
 
+export const getPlayerGoals = cache((username: string, status?: string) => {
+  return handleNotFound(apiClient.goals.getPlayerGoals(username, { status: status as never }));
+});
+
+export const getPlayerMilestones = cache((username: string) => {
+  return handleNotFound(apiClient.goals.getPlayerMilestones(username));
+});
+
 export const getPlayerCompetitions = cache((username: string) => {
   return handleNotFound(apiClient.players.getPlayerCompetitions(username));
 });

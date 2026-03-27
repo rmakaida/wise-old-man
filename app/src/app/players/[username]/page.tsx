@@ -6,6 +6,7 @@ import { PlayerOverviewWidgets } from "~/components/players/PlayerOverviewWidget
 import { PlayerOverviewAchievements } from "~/components/players/PlayerOverviewAchievements";
 import { PlayerOverviewMemberships } from "~/components/players/PlayerOverviewGroups";
 import { PlayerOverviewCompetition } from "~/components/players/PlayerOverviewCompetition";
+import { ActiveGoalsWidget } from "~/components/players/ActiveGoalsWidget";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -47,6 +48,7 @@ export default async function PlayerPage(props: PageProps) {
             <PlayerOverviewCompetition username={username} />
             <PlayerOverviewMemberships username={username} />
             <PlayerOverviewAchievements player={player} />
+            <ActiveGoalsWidget username={username} />
           </Suspense>
         </div>
         <div className="col-span-12 mt-8 flex flex-col gap-y-7 lg:col-span-8 lg:gap-y-4">

@@ -15,6 +15,7 @@ const TABS = [
   { label: "Groups", route: "/groups" },
   { label: "Records", route: "/records" },
   { label: "Achievements", route: "/achievements" },
+  { label: "Goals", route: "/goals" },
   { label: "Name Changes", route: "/name-changes" },
 ];
 

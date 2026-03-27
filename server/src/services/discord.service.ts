@@ -20,6 +20,10 @@ export enum DiscordBotEventType {
   MEMBER_HCIM_DIED = 'MEMBER_HCIM_DIED',
   MEMBER_NAME_CHANGED = 'MEMBER_NAME_CHANGED',
 
+  // Goal Events
+  GOAL_COMPLETED = 'GOAL_COMPLETED',
+  MILESTONE_ACHIEVED = 'MILESTONE_ACHIEVED',
+
   // Moderation Events
   PLAYER_FLAGGED_REVIEW = 'PLAYER_FLAGGED_REVIEW',
   CREATION_SPAM_WARNING = 'CREATION_SPAM_WARNING'
@@ -85,6 +89,19 @@ type DiscordBotEventPayloadMap = {
     groupId: number;
     player: Player;
     previousName: string;
+  };
+  [DiscordBotEventType.GOAL_COMPLETED]: {
+    groupId: number;
+    player: Player;
+    metric: string;
+    targetValue: number;
+    title: string | null;
+  };
+  [DiscordBotEventType.MILESTONE_ACHIEVED]: {
+    groupId: number;
+    player: Player;
+    metric: string;
+    milestoneValue: number;
   };
   [DiscordBotEventType.PLAYER_FLAGGED_REVIEW]: {
     player: Player;

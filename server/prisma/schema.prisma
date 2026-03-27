@@ -36,6 +36,51 @@ model Achievement {
   @@map("achievements")
 }
 
+model Goal {
+  id           Int        @id @default(autoincrement())
+  playerId     Int
+  metric       Metric
+  targetValue  BigInt
+  currentValue BigInt     @default(0)
+  status       GoalStatus @default(active)
+  deadline     DateTime?  @db.Timestamptz(6)
+  completedAt  DateTime?  @db.Timestamptz(6)
+  title        String?    @db.VarChar(100)
+  description  String?    @db.VarChar(500)
+  groupId      Int?
+  createdAt    DateTime   @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime   @updatedAt @db.Timestamptz(6)
+
+  // Relations
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  group  Group? @relation(fields: [groupId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+
+  // Indices
+  @@index([playerId, status], map: "goals_player_id_status")
+  @@index([status, deadline], map: "goals_status_deadline")
+  @@index([groupId], map: "goals_group_id")
+  // Map
+  @@map("goals")
+}
+
+model PlayerMilestone {
+  id             Int      @id @default(autoincrement())
+  playerId       Int
+  metric         Metric
+  milestoneValue BigInt
+  achievedAt     DateTime @default(now()) @db.Timestamptz(6)
+
+  // Relations
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  // Constraints
+  @@unique([playerId, metric, milestoneValue], map: "player_milestones_player_metric_value")
+  // Indices
+  @@index([playerId, achievedAt(sort: Desc)], map: "player_milestones_player_id_achieved_at")
+  // Map
+  @@map("playerMilestones")
+}
+
 model Competition {
   id               Int             @id @default(autoincrement())
   title            String          @db.VarChar(50)
@@ -154,6 +199,7 @@ model Group {
   patronages     Patron[]
   socialLinks    GroupSocialLinks[]
   roleOrders     GroupRoleOrder[]
+  goals          Goal[]
 
   // Constraints
   @@unique([name], map: "groups_name_key")
@@ -297,6 +343,8 @@ model Player {
   patronages     Patron[]
   annotations    PlayerAnnotation[]
   cachedDeltas   CachedDelta[]
+  goals          Goal[]
+  milestones     PlayerMilestone[]
 
   // Indices
   @@index([build], map: "players_build")
@@ -697,6 +745,14 @@ enum PlayerStatus {
   banned
 
   @@map("player_status")
+}
+
+enum GoalStatus {
+  active
+  completed
+  expired
+
+  @@map("goal_status")
 }
 
 enum PlayerAnnotationType {

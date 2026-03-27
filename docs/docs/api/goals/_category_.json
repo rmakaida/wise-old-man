@@ -1,0 +1,10 @@
+{
+  "label": "Goals API",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "title": "Goals API",
+    "slug": "/api/goals",
+    "description": "Endpoints for managing player goals, milestones, and group goal tracking."
+  }
+}

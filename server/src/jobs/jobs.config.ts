@@ -9,6 +9,10 @@ import { CheckPlayerBannedJobHandler } from './handlers/check-player-banned.job'
 import { CheckPlayerRankedJobHandler } from './handlers/check-player-ranked.job';
 import { CheckProtectedPlayersSpamJobHandler } from './handlers/check-protected-players-spam.job';
 import { DispatchCompetitionCreatedDiscordEventJobHandler } from './handlers/dispatch-competition-created-discord-event.job';
+import { DispatchGoalCompletedDiscordEventJobHandler } from './handlers/dispatch-goal-completed-discord-event.job';
+import { DispatchMilestoneAchievedDiscordEventJobHandler } from './handlers/dispatch-milestone-achieved-discord-event.job';
+import { ExpirePlayerGoalsJobHandler } from './handlers/expire-player-goals.job';
+import { SyncPlayerGoalsJobHandler } from './handlers/sync-player-goals.job';
 import { DispatchCompetitionEndedDiscordEventJobHandler } from './handlers/dispatch-competition-ended-discord-event.job';
 import { DispatchCompetitionEndingDiscordEventJobHandler } from './handlers/dispatch-competition-ending-discord-event.job';
 import { DispatchCompetitionStartedDiscordEventJobHandler } from './handlers/dispatch-competition-started-discord-event.job';
@@ -63,6 +67,9 @@ export const JOB_HANDLER_MAP = {
   [JobType.CHECK_PLAYER_RANKED]: CheckPlayerRankedJobHandler,
   [JobType.CHECK_PROTECED_PLAYERS_SPAM]: CheckProtectedPlayersSpamJobHandler,
   [JobType.DISPATCH_COMPETITION_CREATED_DISCORD_EVENT]: DispatchCompetitionCreatedDiscordEventJobHandler,
+  [JobType.DISPATCH_GOAL_COMPLETED_DISCORD_EVENT]: DispatchGoalCompletedDiscordEventJobHandler,
+  [JobType.DISPATCH_MILESTONE_ACHIEVED_DISCORD_EVENT]: DispatchMilestoneAchievedDiscordEventJobHandler,
+  [JobType.EXPIRE_PLAYER_GOALS]: ExpirePlayerGoalsJobHandler,
   [JobType.DISPATCH_COMPETITION_ENDED_DISCORD_EVENT]: DispatchCompetitionEndedDiscordEventJobHandler,
   [JobType.DISPATCH_COMPETITION_ENDING_DISCORD_EVENT]: DispatchCompetitionEndingDiscordEventJobHandler,
   [JobType.DISPATCH_COMPETITION_STARTED_DISCORD_EVENT]: DispatchCompetitionStartedDiscordEventJobHandler,
@@ -92,6 +99,7 @@ export const JOB_HANDLER_MAP = {
   [JobType.SYNC_API_KEYS]: SyncApiKeysJobHandler,
   [JobType.SYNC_PATRONS]: SyncPatronsJobHandler,
   [JobType.SYNC_PLAYER_ACHIEVEMENTS]: SyncPlayerAchievementsJobHandler,
+  [JobType.SYNC_PLAYER_GOALS]: SyncPlayerGoalsJobHandler,
   [JobType.SYNC_PLAYER_COMPETITION_PARTICIPATIONS]: SyncPlayerCompetitionParticipationsJobHandler,
   [JobType.SYNC_PLAYER_DELTAS]: SyncPlayerDeltasJobHandler,
   [JobType.SYNC_PLAYER_RECORDS]: SyncPlayerRecordsJobHandler,
@@ -122,6 +130,8 @@ export const CRON_CONFIG = [
   { interval: '0 * * * *', type: JobType.SCHEDULE_FLAGGED_PLAYER_REVIEW },
   // every 6 hours
   { interval: '0 */6 * * *', type: JobType.INVALIDATE_DELTAS },
+  // every day at midnight UTC
+  { interval: '0 0 * * *', type: JobType.EXPIRE_PLAYER_GOALS },
   // everyday at 8:00 UTC
   { interval: '0 8 * * *', type: JobType.CALCULATE_COMPUTED_RANK_TABLES },
   { interval: '0 8 * * *', type: JobType.SCHEDULE_BANNED_PLAYER_CHECKS },

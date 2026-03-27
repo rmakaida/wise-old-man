@@ -17,6 +17,8 @@ export * from './efficiency-algorithm-type.enum';
 export * from './group-role-order.type';
 export * from './group-role.enum';
 export * from './group-social-links.type';
+export * from './goal-status.enum';
+export * from './goal.type';
 export * from './group.type';
 export * from './member-activity-type.enum';
 export * from './member-activity.type';

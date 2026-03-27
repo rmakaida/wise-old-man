@@ -13,6 +13,7 @@ export function handler({
   previousSnapshotDate
 }: EventPayloadMap[EventType.PLAYER_UPDATED]) {
   jobManager.add(JobType.SYNC_PLAYER_COMPETITION_PARTICIPATIONS, { username });
+  jobManager.add(JobType.SYNC_PLAYER_GOALS, { username });
 
   if (previousSnapshotDate !== null) {
     const timeBetweenUpdates = latestSnapshotDate.getTime() - previousSnapshotDate.getTime();

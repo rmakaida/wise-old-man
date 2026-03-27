@@ -4,6 +4,7 @@ export * from '../../server/src/utils/shared';
 export * from './api-types';
 
 export * from './clients/CompetitionsClient';
+export * from './clients/GoalsClient';
 export * from './clients/DeltasClient';
 export * from './clients/EfficiencyClient';
 export * from './clients/NameChangesClient';

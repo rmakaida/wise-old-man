@@ -10,7 +10,7 @@
     "strict": true,
     "useUnknownInCatchVariables": false,
     "noImplicitAny": false,
-    "target": "es2016",
+    "target": "es2020",
     "types": ["jest", "node"]
   },
   "exclude": ["node_modules", "dist"]

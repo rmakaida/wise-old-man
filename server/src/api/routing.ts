@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import { logger } from '../services/logger.service';
 import { BadRequestErrorZ, NotFoundErrorZ } from './errors';
 import competitionRouter from './modules/competitions/competition.router';
+import goalsRouter from './modules/goals/goal.router';
 import deltaRouter from './modules/deltas/delta.router';
 import efficiencyRouter from './modules/efficiency/efficiency.router';
 import generalRouter from './modules/general/general.router';
@@ -35,6 +36,7 @@ class RoutingHandler {
 
     // Register all the modules to the router
     this.router.use(competitionRouter);
+    this.router.use(goalsRouter);
     this.router.use(deltaRouter);
     this.router.use(efficiencyRouter);
     this.router.use(generalRouter);

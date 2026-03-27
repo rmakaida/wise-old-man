@@ -1,6 +1,8 @@
 import { CompetitionTeam, GroupRole, Metric, Period } from '../../server/src/types';
 
 export {
+  GoalResponse,
+  MilestoneResponse,
   AchievementProgressResponse,
   AchievementResponse,
   CompetitionDetailsResponse,
@@ -25,6 +27,20 @@ export {
 } from '../../server/src/api/responses';
 
 export * from '../../server/src/types';
+
+export interface CreateGoalPayload {
+  metric: Metric;
+  targetValue: number;
+  deadline?: string;
+  title?: string;
+  description?: string;
+}
+
+export interface UpdateGoalPayload {
+  title?: string;
+  description?: string;
+  deadline?: string | null;
+}
 
 export interface GenericCountMessageResponse {
   count: number;

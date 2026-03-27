@@ -39,7 +39,8 @@ function withinRange(before: Snapshot, after: Snapshot): boolean {
 function hasChanged(before: Snapshot, after: Snapshot): boolean {
   // EHP and EHB can fluctuate without the player's envolvement
   const metricsToIgnore = [Metric.EHP, Metric.EHB];
-  const isValidKey = (key: MetricValueKey<Metric>) => !metricsToIgnore.map(getMetricValueKey).includes(key);
+  const keysToIgnore = metricsToIgnore.map(getMetricValueKey) as MetricValueKey<Metric>[];
+  const isValidKey = (key: MetricValueKey<Metric>) => !keysToIgnore.includes(key);
 
   return METRICS.map(getMetricValueKey).some(k => isValidKey(k) && after[k] > 0 && after[k] > before[k]);
 }

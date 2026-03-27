@@ -1,4 +1,5 @@
 export * from './achievement-progress.response';
+export * from './goal.response';
 export * from './achievement.response';
 export * from './competition-details.response';
 export * from './competition.response';

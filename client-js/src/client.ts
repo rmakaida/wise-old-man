@@ -2,6 +2,7 @@ import BaseAPIClient from './clients/BaseAPIClient';
 import CompetitionsClient from './clients/CompetitionsClient';
 import DeltasClient from './clients/DeltasClient';
 import EfficiencyClient from './clients/EfficiencyClient';
+import GoalsClient from './clients/GoalsClient';
 import GroupsClient from './clients/GroupsClient';
 import NameChangesClient from './clients/NameChangesClient';
 import PlayersClient from './clients/PlayersClient';
@@ -15,6 +16,7 @@ interface WOMClientOptions {
 }
 
 export default class WOMClient extends BaseAPIClient {
+  public goals: GoalsClient;
   public deltas: DeltasClient;
   public groups: GroupsClient;
   public players: PlayersClient;
@@ -35,6 +37,7 @@ export default class WOMClient extends BaseAPIClient {
 
     super(headers, baseApiUrl);
 
+    this.goals = new GoalsClient(headers, baseApiUrl);
     this.deltas = new DeltasClient(headers, baseApiUrl);
     this.groups = new GroupsClient(headers, baseApiUrl);
     this.players = new PlayersClient(headers, baseApiUrl);
