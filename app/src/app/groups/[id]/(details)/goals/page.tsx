@@ -32,7 +32,7 @@ export default function GroupGoalsPage({ params }: PageProps) {
   const client = useWOMClient();
 
   const [statusFilter, setStatusFilter] = useState<GoalStatus | "all">("active");
-  const [view, setView] = useState<"members" | "list" | "milestones">("members");
+  const [view, setView] = useState<"members" | "goals" | "milestones">("members");
 
   const { data: goals = [], isLoading } = useQuery({
     queryKey: ["groupGoals", groupId],
@@ -88,7 +88,7 @@ export default function GroupGoalsPage({ params }: PageProps) {
 
         {/* View toggle */}
         <div className="flex overflow-hidden rounded-lg border border-gray-600">
-          {(["members", "list", "milestones"] as const).map((v) => (
+          {(["members", "goals", "milestones"] as const).map((v) => (
             <button
               key={v}
               onClick={() => setView(v)}
@@ -108,7 +108,7 @@ export default function GroupGoalsPage({ params }: PageProps) {
         isLoading ? <LoadingState /> : <MemberProgressTable members={members} />
       )}
 
-      {view === "list" && (
+      {view === "goals" && (
         <>
           <div className="mb-4 flex flex-wrap gap-2">
             {(["all", "active", "completed", "expired"] as const).map((s) => (

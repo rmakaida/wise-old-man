@@ -5,7 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["es6", "dom", "es2019", "es2022"],
     "noImplicitAny": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "target": "es2015",
     "outDir": "dist",

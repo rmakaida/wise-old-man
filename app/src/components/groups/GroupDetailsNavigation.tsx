@@ -13,6 +13,7 @@ const TABS = [
   { label: "Competitions", route: "/competitions" },
   { label: "Leaderboards", route: "/hiscores" },
   { label: "Achievements", route: "/achievements" },
+  { label: "Goals", route: "/goals" },
   { label: "Name Changes", route: "/name-changes" },
   { label: "Statistics", route: "/statistics" },
 ];

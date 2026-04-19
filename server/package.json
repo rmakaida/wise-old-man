@@ -15,7 +15,8 @@
     "prisma:generate": "prisma generate",
     "dev": "cross-env ./scripts/run-dev.sh",
     "prod": "cross-env ./scripts/run-prod.sh",
-    "test": "cross-env ./scripts/run-tests.sh"
+    "test": "cross-env ./scripts/run-tests.sh",
+    "test:goals": "cross-env SERVER_CORE_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/wise-old-man_TEST?schema=public SHARED_ADMIN_PASSWORD=password123_the_most_hackable_pw_ever NODE_ENV=test SERVER_TYPE=dev TZ=UTC node_modules/.bin/jest --testPathPattern=goals --runInBand --forceExit --verbose"
   },
   "dependencies": {
     "@attio/fetchable": "^0.0.1-experimental.4",

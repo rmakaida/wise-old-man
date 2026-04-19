@@ -11,9 +11,17 @@ async function findGroupGoals(groupId: number, status?: GoalStatus) {
     throw new NotFoundError('Group not found.');
   }
 
+  const memberships = await prisma.membership.findMany({
+    where: { groupId },
+    select: { playerId: true }
+  });
+
+  const playerIds = memberships.map(m => m.playerId);
+  if (playerIds.length === 0) return [];
+
   const goals = await prisma.goal.findMany({
     where: {
-      groupId,
+      playerId: { in: playerIds },
       ...(status ? { status } : {})
     },
     include: {
