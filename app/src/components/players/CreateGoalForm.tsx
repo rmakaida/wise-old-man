@@ -35,7 +35,7 @@ export function CreateGoalForm({ username, isOpen, onClose }: CreateGoalFormProp
       return client.goals.createGoal(username, {
         metric,
         targetValue: Number(targetValue),
-        deadline: deadline || undefined,
+        deadline: deadline ? new Date(deadline).toISOString() : undefined,
         title: title || undefined,
       });
     },
@@ -140,7 +140,7 @@ export function CreateGoalForm({ username, isOpen, onClose }: CreateGoalFormProp
               id="deadline"
               type="datetime-local"
               value={deadline}
-              onChange={(e) => setDeadline(e.target.value ? new Date(e.target.value).toISOString() : "")}
+              onChange={(e) => setDeadline(e.target.value)}
             />
           </div>
 
